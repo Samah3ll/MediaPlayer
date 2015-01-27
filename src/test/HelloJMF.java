@@ -15,14 +15,19 @@ public class HelloJMF {
 
 	JFrame frame = new JFrame(" Hello JMF Player");
 	static Player helloJMFPlayer = null;
-	//private String path = "C:\Users\SamaHell\Videos\Clip\THE ALGORITHM Trojans.mp4";
+	private String path = System.getProperty("user.dir");
+	
+	
 
 	public HelloJMF(){
+		path += "\\res\\Nachtmahr - can you feel the beat.mp4.AVI";
+		System.out.println(path);
+		
 		try{
 			// method using URL
-			URL url=new URL("file",null,"hello.wav");
-			helloJMFPlayer = Manager.createRealizedPlayer( url);} 
-		catch( Exception e) {
+			URL url=new URL("file",null,path);
+			helloJMFPlayer = Manager.createRealizedPlayer( url);
+		} catch ( Exception e) {
 			System.out.println(" Unable tocreate the audioPlayer :" + e );
 		}	
 		
