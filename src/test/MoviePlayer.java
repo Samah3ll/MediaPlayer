@@ -1,7 +1,9 @@
 package test;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -11,7 +13,10 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -24,6 +29,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,20 +39,46 @@ import javafx.util.Duration;
  * Time: 15:12
  * To change this template use File | Settings | File Templates.
  */
-public class MoviePlayer extends Application {
+public class MoviePlayer extends Application implements javafx.fxml.Initializable {
 	
 	private String path = System.getProperty("user.dir");
+	
+	@FXML
+	private Button buttonMenu;
+	
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		
+	}
 
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
     
     @Override
     public void start(final Stage stage) throws Exception {
+    	
+    	Parent root2;
+		try {
+			root2 = FXMLLoader.load(getClass().getResource("Fenetre-test.fxml"));
+		} catch (IOException e) {
+			e.printStackTrace();
+			return;
+		}
+		/*
+		Scene scene2 = new Scene(root2);
+		stage.setScene(scene2);
+		stage.sizeToScene();
+		stage.show();
+    	
         stage.setTitle("Movie Player");
+        */
         Group root = new Group();
+        
+        root.getChildren().add(root2);
 
-        String trailer = getHostServices().getDocumentBase()+"res/Nachtmahr.mp4";
+        String trailer = getHostServices().getDocumentBase()+"res/Trojans.mp4";
         Media media = new Media(trailer);
         //path += "\\res\\Nachtmahr.mp4";
         //File in = new File(path);
@@ -161,4 +194,6 @@ public class MoviePlayer extends Application {
             }
         });
     }
+
+	
 }
